@@ -100,17 +100,18 @@ class ParkingLotTopo(Topo):
         # for N = 1
         # TODO: Replace the template code to create a parking lot topology for any arbitrary N (>= 1)
         # Begin: Template code
-        #s1 = self.addSwitch('s1')
-        #h1 = self.addHost('h1', **hconfig)
+        """
+	s1 = self.addSwitch('s1')
+        h1 = self.addHost('h1', **hconfig)
 
         # Wire up receiver
-        #self.addLink(receiver, s1,
-        #             port1=0, port2=uplink, **lconfig)
+        self.addLink(receiver, s1,
+                     port1=0, port2=uplink, **lconfig)
 
         # Wire up clients:
-        #self.addLink(h1, s1,
-        #              port1=0, port2=hostlink, **lconfig)
-
+        self.addLink(h1, s1,
+                      port1=0, port2=hostlink, **lconfig)
+	"""
         # Uncomment the next 8 lines to create a N = 3 parking lot topology
         #s2 = self.addSwitch('s2')
         #h2 = self.addHost('h2', **hconfig)
@@ -125,25 +126,23 @@ class ParkingLotTopo(Topo):
         #self.addLink(h3, s3,
         #              port1=0, port2=hostlink, **lconfig)
         # End: Template code
-
+	
 	prev_switch = None
 	
 	for i in range(1,n+1):
 		switch = self.addSwitch('s'+str(i))
-		host = self.addHost('h'+str(i))
+		host = self.addHost('h'+str(i),**hconfig)
 		# Add a link between host and switch
 		self.addLink(host,switch, port1=0, port2=hostlink, **lconfig)
 
 		# Now wire this with the previous switch
 		if prev_switch == None :
 			# Its the first switch, just add receiver to it
-			self.addLink(switch, receiver, port1=0, port2=uplink, **lconfig)
+			self.addLink(receiver, switch, port1=0, port2=uplink, **lconfig)
 		else:
 			self.addLink(prev_switch, switch, port1=downlink, port2=uplink, **lconfig)
 		# Assign current switch to the prev switch for wiring it up in the next iteration
 		prev_switch = switch
-	
-
 		
 
 def waitListening(client, server, port):
@@ -197,10 +196,10 @@ def run_parkinglot_expt(net, n):
     # TODO: start the sender iperf processes and wait for the flows to finish
     # Hint: Use getNodeByName() to get a handle on each sender.
     for i in range(1,n+1):
-	node = getNodeByName('h'+str(i))
+	node = net.getNodeByName('h'+str(i))
 	node.sendCmd('iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt' % (recvr.IP(), 5001, seconds, args.dir, 'h'+str(i)))
     for i in range(1,n+1):
-	node = getNodeByName('h'+str(i))
+	node = net.getNodeByName('h'+str(i))
 	node.waitOutput()
 	
     # Hint: Use sendCmd() and waitOutput() to start iperf and wait for them to finish

@@ -29,7 +29,7 @@ def parse_file(f):
     srtt = []
     for l in open(f).xreadlines():
         fields = l.strip().split(' ')
-        if len(fields) != 10:
+        if len(fields) < 10:
             break
         if fields[2].split(':')[1] != args.port:
             continue
