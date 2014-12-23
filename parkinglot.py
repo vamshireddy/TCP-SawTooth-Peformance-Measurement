@@ -31,7 +31,10 @@ def cprint(s, color, cr=True):
     else:
         print T.colored(s, color),
 
+# Parser for parsing the flags provided to the command line
 parser = argparse.ArgumentParser(description="Parking lot tests")
+
+
 parser.add_argument('--bw', '-b',
                     type=float,
                     help="Bandwidth of network links",
@@ -60,6 +63,7 @@ parser.add_argument('--time', '-t',
 # Expt parameters
 args = parser.parse_args()
 
+# Check if the directory exists in the system, if not create one with the passed argument.
 if not os.path.exists(args.dir):
     os.makedirs(args.dir)
 
@@ -96,16 +100,16 @@ class ParkingLotTopo(Topo):
         # for N = 1
         # TODO: Replace the template code to create a parking lot topology for any arbitrary N (>= 1)
         # Begin: Template code
-        s1 = self.addSwitch('s1')
-        h1 = self.addHost('h1', **hconfig)
+        #s1 = self.addSwitch('s1')
+        #h1 = self.addHost('h1', **hconfig)
 
         # Wire up receiver
-        self.addLink(receiver, s1,
-                      port1=0, port2=uplink, **lconfig)
+        #self.addLink(receiver, s1,
+        #             port1=0, port2=uplink, **lconfig)
 
         # Wire up clients:
-        self.addLink(h1, s1,
-                      port1=0, port2=hostlink, **lconfig)
+        #self.addLink(h1, s1,
+        #              port1=0, port2=hostlink, **lconfig)
 
         # Uncomment the next 8 lines to create a N = 3 parking lot topology
         #s2 = self.addSwitch('s2')
@@ -120,8 +124,27 @@ class ParkingLotTopo(Topo):
         #              port1=downlink, port2=uplink, **lconfig)
         #self.addLink(h3, s3,
         #              port1=0, port2=hostlink, **lconfig)
-
         # End: Template code
+
+	prev_switch = None
+	
+	for i in range(0,n):
+		switch = self.addSwitch('s'+str(i))
+		host = self.addHost('h'+str(i))
+		# Add a link between host and switch
+		self.addLink(host,switch, port1=0, port2=hostlink, **lconfig)
+
+		# Now wire this with the previous switch
+		if prev_switch == None :
+			# Its the first switch, just add receiver to it
+			self.addLink(switch, receiver, port1=0, port2=uplink, **lconfig)
+		else:
+			self.addLink(prev_switch, switch, port1=downlink, port2=uplink, **lconfig)
+		# Assign current switch to the prev switch for wiring it up in the next iteration
+		prev_switch = switch
+	
+
+		
 
 def waitListening(client, server, port):
     "Wait until server is listening on port"
