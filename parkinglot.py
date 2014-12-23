@@ -128,7 +128,7 @@ class ParkingLotTopo(Topo):
 
 	prev_switch = None
 	
-	for i in range(0,n):
+	for i in range(1,n+1):
 		switch = self.addSwitch('s'+str(i))
 		host = self.addHost('h'+str(i))
 		# Add a link between host and switch
@@ -196,6 +196,13 @@ def run_parkinglot_expt(net, n):
 
     # TODO: start the sender iperf processes and wait for the flows to finish
     # Hint: Use getNodeByName() to get a handle on each sender.
+    for i in range(1,n+1):
+	node = getNodeByName('h'+str(i))
+	node.sendCmd('iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt' % (recvr.IP(), 5001, seconds, args.dir, 'h'+str(i)))
+    for i in range(1,n+1):
+	node = getNodeByName('h'+str(i))
+	node.waitOutput()
+	
     # Hint: Use sendCmd() and waitOutput() to start iperf and wait for them to finish
     # Hint: waitOutput waits for the command to finish allowing you to wait on a particular process on the host
     # iperf command to start flow: 'iperf -c %s -p %s -t %d -i 1 -yc > %s/iperf_%s.txt' % (recvr.IP(), 5001, seconds, args.dir, node_name)
