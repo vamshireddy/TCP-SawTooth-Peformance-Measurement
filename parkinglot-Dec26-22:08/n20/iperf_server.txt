@@ -1,0 +1,35 @@
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  4] local 10.0.0.21 port 5001 connected with 10.0.0.1 port 48006
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0- 0.0 sec  0.00 Bytes  0.00 bits/sec
+[  5] local 10.0.0.21 port 5001 connected with 10.0.0.1 port 48026
+[  4] local 10.0.0.21 port 5001 connected with 10.0.0.2 port 59599
+[  6] local 10.0.0.21 port 5001 connected with 10.0.0.3 port 50054
+[  7] local 10.0.0.21 port 5001 connected with 10.0.0.4 port 50365
+[  8] local 10.0.0.21 port 5001 connected with 10.0.0.5 port 34850
+[  9] local 10.0.0.21 port 5001 connected with 10.0.0.6 port 50476
+[ 10] local 10.0.0.21 port 5001 connected with 10.0.0.7 port 39209
+[ 11] local 10.0.0.21 port 5001 connected with 10.0.0.8 port 44067
+[ 12] local 10.0.0.21 port 5001 connected with 10.0.0.9 port 47401
+[ 13] local 10.0.0.21 port 5001 connected with 10.0.0.10 port 35091
+[ 14] local 10.0.0.21 port 5001 connected with 10.0.0.11 port 51237
+[ 15] local 10.0.0.21 port 5001 connected with 10.0.0.12 port 49071
+[ 16] local 10.0.0.21 port 5001 connected with 10.0.0.14 port 36769
+[ 17] local 10.0.0.21 port 5001 connected with 10.0.0.13 port 54490
+[ 18] local 10.0.0.21 port 5001 connected with 10.0.0.15 port 48085
+[ 19] local 10.0.0.21 port 5001 connected with 10.0.0.17 port 40687
+[ 20] local 10.0.0.21 port 5001 connected with 10.0.0.16 port 54229
+[ 21] local 10.0.0.21 port 5001 connected with 10.0.0.19 port 52443
+[ 22] local 10.0.0.21 port 5001 connected with 10.0.0.18 port 52066
+[ 23] local 10.0.0.21 port 5001 connected with 10.0.0.20 port 45292
+[ 14]  0.0-34.5 sec  1.62 MBytes   395 Kbits/sec
+[ 12]  0.0-35.8 sec  2.25 MBytes   527 Kbits/sec
+[ 20]  0.0-36.4 sec  1.62 MBytes   374 Kbits/sec
+[  6]  0.0-37.8 sec  2.12 MBytes   472 Kbits/sec
+[ 17]  0.0-37.1 sec  2.50 MBytes   565 Kbits/sec
+[ 10]  0.0-37.6 sec  3.00 MBytes   669 Kbits/sec
+[ 18]  0.0-37.3 sec  1.75 MBytes   394 Kbits/sec
+[ 23]  0.0-37.1 sec  1.75 MBytes   395 Kbits/sec

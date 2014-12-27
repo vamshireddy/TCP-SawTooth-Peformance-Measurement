@@ -27,11 +27,11 @@ bw=10
 # In this example, we are assuming that each
 # client is connected to port 2 on its switch.
 
-for n in 1 2 3 4 5; do
+for n in 15; do
     dir=$rootdir/n$n
     python parkinglot.py --bw $bw \
         --dir $dir \
-        -t 30 \
+        -t 120 \
         -n $n
     python util/plot_rate.py --rx \
         --maxy $bw \
